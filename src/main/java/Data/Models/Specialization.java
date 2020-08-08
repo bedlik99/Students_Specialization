@@ -1,43 +1,35 @@
 package Data.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Class that contains information about name of specializations and
+ * has their own list of students that were assigned to.
+ */
 public class Specialization {
 
-    private String pick1;
-    private String pick2;
-    private String pick3;
+    private String specializationName;
+    private final List<Student> newStudentsList = new ArrayList<>();
 
-    public String getPick1() {
-        return pick1;
+    public Specialization(String specializationName){
+        this.specializationName = specializationName;
     }
 
-    public void setPick1(String pick1) {
-        this.pick1 = pick1;
+    public String getSpecializationName() {
+        return specializationName;
     }
 
-    public String getPick2() {
-        return pick2;
+    public void setSpecializationName(String specializationName) {
+        this.specializationName = specializationName;
     }
 
-    public void setPick2(String pick2) {
-        this.pick2 = pick2;
-    }
-
-    public String getPick3() {
-        return pick3;
-    }
-
-    public void setPick3(String pick3) {
-        this.pick3 = pick3;
+    public List<Student> getNewStudentsList() {
+        return newStudentsList;
     }
 
     @Override
     public String toString() {
-        return "Specialization{" +
-                "pick1='" + pick1 + '\'' +
-                ", pick2='" + pick2 + '\'' +
-                ", pick3='" + pick3 + '\'' +
-                '}';
+        return "Specialization = " + specializationName;
     }
-
-
 }

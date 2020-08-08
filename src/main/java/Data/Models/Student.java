@@ -1,33 +1,63 @@
 package Data.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Student class includes the fields that are loaded from JSONFile. Object of class student is being held in list.
+ * Student class includes fields that are loaded from JSONFile. Object of class student, is being held in list.
  */
 public class Student {
 
-    private int id;
+    /**
+     * Id of student - number from 270 000 to 350 000
+     */
+    private long numberID;
+
+    /**
+     * First name of student
+     */
     private String firstName;
+
+    /**
+     * Last name of student
+     */
     private String lastName;
-    private long albumsNumber;
-    private Specialization specialization = new Specialization();
+
+    /**
+     * Available specs that student could have chosen. Number of elements is number of specs, student could have chosen.
+     */
+    private final List<String> availableSpecs = new ArrayList<>();
+
+    /**
+     * Students specialization picking-order. Number of elements is number of specs, student could have chosen.
+     */
+    private final List<String> specsChosenOrder = new ArrayList<>();
+
+    /**
+     * Specialization that student were assigned, according to logic of program.
+     */
     private String specializationAssigned;
+
+    /**
+     * Value used when reditributing students to their highest priority picked specializations.
+     */
     private double averageGrade;
 
 
-    public Specialization getSpecialization() {
-        return specialization;
+    public List<String> getAvailableSpecs() {
+        return availableSpecs;
     }
 
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
+    public List<String> getSpecsChosenOrder() {
+        return specsChosenOrder;
     }
 
-    public int getId() {
-        return id;
+    public long getNumberID() {
+        return numberID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNumberID(long numberID) {
+        this.numberID = numberID;
     }
 
     public String getFirstName() {
@@ -44,14 +74,6 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public long getAlbumsNumber() {
-        return albumsNumber;
-    }
-
-    public void setAlbumsNumber(long albumsNumber) {
-        this.albumsNumber = albumsNumber;
     }
 
 
@@ -71,16 +93,14 @@ public class Student {
         this.averageGrade = averageGrade;
     }
 
+
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName=' " + firstName + '\'' +
-                ", lastName=' " + lastName + '\'' +
-                ", albumsNumber= " + albumsNumber +
-                ", specialization= " + specialization +
-                ", specializationGiven=' " + specializationAssigned + '\'' +
-                ", averageGrade= " + averageGrade +
-                '}';
+        return "\n#Student#" +
+                "\nnumberID=" + numberID +
+                "\nfirstName=' " + firstName + '\'' +
+                "\nlastName=' " + lastName + '\'' +
+                "\nspecializationAssigned=' " + specializationAssigned + '\'' +
+                "\naverageGrade= " + averageGrade;
     }
 }
