@@ -12,12 +12,12 @@ mvn compile
 mvn exec:java
 ```
 <h3>About logic of programme</h3>
-<h4>**Input file:</h4>
+<h4>1. Input file:</h4>
 
 * fomat --> *.json 
 * Application contains 3 *.json files with pseudo randomly generated fields.(with 90/200/350 elements) to test results.
 
-<h4>**Output file:</h4>
+<h4>2. Output file:</h4>
 
 * format --> *.csv
 * Each file corresponds to specific specialization that students got assigned to.
