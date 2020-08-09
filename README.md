@@ -13,10 +13,12 @@ mvn exec:java
 ```
 <h3>About logic of programme</h3>
 **Input file:
+
 * fomat --> *.json 
 * Application contains 3 *.json files with pseudo randomly generated fields.(with 90/200/350 elements) to test results.
 
 **Output file:
+
 * format --> *.csv
 * Each file corresponds to specific specialization that students got assigned to.
 * File contains of :  album Id, first name, last name, specialization assigned
