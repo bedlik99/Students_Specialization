@@ -11,7 +11,7 @@ Launching application:
 mvn compile
 mvn exec:java
 ```
-<h3>About logic of programme</h3>
+<h3>_Input and Output_</h3>
 <h4>1. Input file:</h4>
 
 * fomat --> *.json 
