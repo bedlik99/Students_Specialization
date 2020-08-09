@@ -6,7 +6,7 @@
 * Used Build automation tool: Maven 3.8.1  
 * Used Unit-Testing framework: JUnit 5 
 
-Launching application:
+**Launching application:**
 ```bash
 mvn compile
 mvn exec:java
