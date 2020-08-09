@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -136,6 +137,7 @@ public abstract class DataInfo {
      */
     public static int setup_SaveStudentsToFiles() {
         String[] specNameFile = new String[currentSpecs.size()];
+        String[] specNameDir = new String[currentSpecs.size()];
 
         for (Student student : listOfStudents) {
             String[] studentInfo = new String[4];
@@ -148,9 +150,14 @@ public abstract class DataInfo {
         }
 
         for (int tmp = 0; tmp < currentSpecs.size(); tmp++) {
-            specNameFile[tmp] = currentSpecs.get(tmp).getSpecializationName().concat("_Students.csv");
 
-            try (CSVWriter writer1 = new CSVWriter(new FileWriter("src/main/resources/OutputFiles/" + specNameFile[tmp]))) {
+            specNameFile[tmp] = currentSpecs.get(tmp).getSpecializationName().concat("_Students.csv");
+            specNameDir[tmp] = currentSpecs.get(tmp).getSpecializationName().concat("_spec");
+            createDirectory(specNameDir[tmp]);
+
+            try (CSVWriter writer1 = new CSVWriter(new FileWriter("src/main/resources/OutputFiles/".concat(
+                    specNameDir[tmp]).concat("/").concat(specNameFile[tmp])))) {
+
                 writer1.writeNext(new String[]{"albumID", "First Name", "Last Name", "Specialization"});
 
                 for (int i = 0; i < listOfStudents.size(); i++) {
@@ -160,17 +167,35 @@ public abstract class DataInfo {
 
                     }
 
-
                 }
 
             } catch (IOException e) {
-                System.out.println("\nNie udalo sie utworzyc pliku nr " + (tmp+1) + ". w podanej lokalizacji: ");
+                System.out.println("\nFailed to create file  nr " + (tmp+1) + ". w podanej lokalizacji: ");
                 System.out.println(e.getMessage());
             }
 
         }
 
         return 0;
+    }
+
+    /**
+     * Method used to create directory for each output file
+     * @param dirName Name Of directory ("SpecName_spec")
+     */
+    private static void createDirectory(String dirName){
+
+        try {
+            Path path = Paths.get("src/main/resources/OutputFiles/" + dirName);
+
+            //java.nio.file.Files;
+            Files.createDirectories(path);
+
+        } catch (IOException e) {
+            System.err.println("Failed to create directory!\n" + e.getMessage());
+
+        }
+
     }
 
 
