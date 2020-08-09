@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +20,6 @@ import java.util.*;
 /**
  * Class DataInfo is abstract class. Its fields contains of read-from-file containers(Lists) with specific objects
  * used in different parts of programme. All of its fields are static so we can get into them by name class 'DataInfo.*'
- *
  */
 public abstract class DataInfo {
 
@@ -60,11 +60,11 @@ public abstract class DataInfo {
      *
      * @param fileName name of json file
      */
-    public static void setup_LoadStudentsData(String fileName) {
+    public static int setup_LoadStudentsData(String fileName) throws FileNotFoundException {
 
         try {
 
-            Path path = Paths.get("src/main/resources/", fileName);
+            Path path = Paths.get("src/main/resources/InputFile/", fileName);
 
             String toLoadFile = path.toFile().getAbsolutePath(); // --> File file = path.toFile();
 
@@ -106,18 +106,27 @@ public abstract class DataInfo {
                 }
             });
 
+
+        }catch (NullPointerException e){
+            return -1;
+
+        }catch (FileNotFoundException e){
+            throw new FileNotFoundException();
+
         } catch (IOException | ParseException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
+            if (!listOfStudents.isEmpty())
+                for (String specName : listOfStudents.get(0).getAvailableSpecs()) {
+                    currentSpecs.add(new Specialization(specName));
 
-        for (String specName : listOfStudents.get(0).getAvailableSpecs()) {
-            currentSpecs.add(new Specialization(specName));
+                }
 
+
+        return 0;
         }
 
-
-    }
 
 
     /**
@@ -125,7 +134,7 @@ public abstract class DataInfo {
      * Where '*' in the name of file is the name of specialization that student was assigned to.
      * The number of files is the number of specializations that were possible for students to sign to.
      */
-    public static void setup_SaveStudentsToFiles() {
+    public static int setup_SaveStudentsToFiles() {
         String[] specNameFile = new String[currentSpecs.size()];
 
         for (Student student : listOfStudents) {
@@ -141,7 +150,7 @@ public abstract class DataInfo {
         for (int tmp = 0; tmp < currentSpecs.size(); tmp++) {
             specNameFile[tmp] = currentSpecs.get(tmp).getSpecializationName().concat("_Students.csv");
 
-            try (CSVWriter writer1 = new CSVWriter(new FileWriter("src/main/resources/OutputFiles/"+ specNameFile[tmp]))) {
+            try (CSVWriter writer1 = new CSVWriter(new FileWriter("src/main/resources/OutputFiles/" + specNameFile[tmp]))) {
                 writer1.writeNext(new String[]{"albumID", "First Name", "Last Name", "Specialization"});
 
                 for (int i = 0; i < listOfStudents.size(); i++) {
@@ -155,13 +164,13 @@ public abstract class DataInfo {
                 }
 
             } catch (IOException e) {
+                System.out.println("\nNie udalo sie utworzyc pliku nr " + (tmp+1) + ". w podanej lokalizacji: ");
                 System.out.println(e.getMessage());
             }
 
         }
 
-
-
+        return 0;
     }
 
 

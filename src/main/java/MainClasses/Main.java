@@ -2,6 +2,8 @@ package MainClasses;
 
 import Data.DataInfo;
 
+import java.io.FileNotFoundException;
+
 /**
  * Main class. Includes input file name. Project is taking student request to get to certain Specialization
  * on their studies. Each student need to choose 3 specializations and prioritize it with 1st,2nd or 3rd power index.
@@ -26,9 +28,17 @@ public class Main {
 
 
     static {
-        DataInfo.setup_LoadStudentsData(fileName);
+
+        try {
+            DataInfo.setup_LoadStudentsData(fileName);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("\nCouldn't load the file!\n " + e.getMessage());
+        }
+
         redistributor = new Redistributor();
     }
+
 
     /**
      * Main function to call function that marks students to chosen specializations and
@@ -40,40 +50,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
-/*        for (Map.Entry<String, Integer> entry : DataInfo.getSpecChosenTimes().entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue() + " signed students");
-
-        }
-        System.out.println("_____________________________________");*/
-
         redistributor.redistributeStudents();
-
         DataInfo.setup_SaveStudentsToFiles();
-
-
-/*        for(int i=0; i<DataInfo.getCurrentSpecs().size();i++){
-
-            System.out.println("\n\n\n\n##################################" +
-                    "\n*******" + DataInfo.getCurrentSpecs().get(i) + "*******");
-            for(Student student: DataInfo.getCurrentSpecs().get(i).getNewStudentsList()){
-                System.out.println("\nID: " + student.getNumberID() + "\nSpec . Assigned: " + student.getSpecializationAssigned()
-                + "\n____________________________________");
-            }
-
-
-        }*/
-
-
-
-
-/*        System.out.println("\n\n\n ALL ^^_STUDENTS_^^ ");
-        for (Student st : DataInfo.getListOfStudents()) {
-            System.out.println("\n@STUDENT@\nId." + st.getNumberID() + ".  Av. Grade: " + st.getAverageGrade() + " Spec. prior. chosen: " +
-                    "\n1st. " + st.getSpecsChosenOrder().get(0) +
-                    "\n2nd. " + st.getSpecsChosenOrder().get(1) +
-                    "\n3rd. " + st.getSpecsChosenOrder().get(2) +
-                    "\n!. Specialization assigned: " + st.getSpecializationAssigned() + "\n");
-        }*/
 
 
     }
