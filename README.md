@@ -1,6 +1,6 @@
 # Students_Specialization
 
-<h3>* Main - to build and run - information about project:</h3>
+<h3>Main - to build and run - information about project:</h3>
 
 Java version: 11, 
 Used Build automation tool: Maven 3.8.1
@@ -11,7 +11,7 @@ Launching application:
 mvn compile
 mvn exec:java
 ```
-<h3>* About logic of programme</h3>
+<h3>About logic of programme</h3>
 <h4>1. Input file:</h4>
 
 * fomat --> *.json 
