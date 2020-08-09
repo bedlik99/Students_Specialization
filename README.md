@@ -1,6 +1,6 @@
 # Students_Specialization
 
-<h1>Main information about project:</h1>
+<h4>Main information about project:</h4>
 
 Java version: 11, 
 Used Build automation tool: Maven_3.8.1
